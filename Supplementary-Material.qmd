@@ -18,6 +18,7 @@ author:
 - name: Jana Valesca Meyer
   affiliation: Department of Anthropology, University of New Mexico
   email: janavalesca@unm.edu
+  url: https://anthropology.unm.edu/people/grad-students/profile/jana-meyer.html
 - name: Michael A. Adler
   affiliation: Department of Anthropology, Southern Methodist University
   email: madler@mail.smu.edu
@@ -32,6 +33,7 @@ editor: source
 number-sections: true
 bibliography: references.bib
 toc: true
+self-contained: true
 ---
 
 ```{r setup, include=FALSE}
@@ -209,7 +211,7 @@ labels <- c("Agricultural Playa Basins" = "Agricultural Context",
 
 Pathway %>%
 ggplot(aes(x = reorder(Photosynthetic.pathway, -sum_DF), y = sum_DF)) +
-  geom_bar(stat = "identity", size = 0.75, alpha = 0.5, color = "#4d4d4d") +
+  geom_bar(stat = "identity", linewidth = 0.75, alpha = 0.5, color = "#4d4d4d") +
   facet_wrap(~ Environmental.Context, ncol = 2, 
              labeller = labeller(Environmental.Context = labels)) +
   scale_x_discrete(labels = parse(text = c("C[4]", "C[3]", "C[3]/C[4]"))) +
@@ -218,15 +220,15 @@ ggplot(aes(x = reorder(Photosynthetic.pathway, -sum_DF), y = sum_DF)) +
         strip.background = element_blank(),
         strip.text.x = element_text(color = "#4d4d4d", size = 12, 
                                     face = "bold"),
-        axis.line = element_line(color = "#4d4d4d", size = 0.75),
+        axis.line = element_line(color = "#4d4d4d", linewidth = 0.75),
         axis.text.x = element_text(color = "#4d4d4d", size = 10),
         axis.text.y = element_text(color = "#4d4d4d", size = 10),
         axis.title.x = element_text(color = "#4d4d4d", size = 12, 
                                     face = "bold"),
         axis.title.y = element_text(color = "#4d4d4d", size = 12, 
                                     face = "bold"),
-        axis.ticks.x = element_line(color = "#4d4d4d", size = 0.75),
-        axis.ticks.y = element_line(color = "#4d4d4d", size = 0.75)) +
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 0.75),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 0.75)) +
         labs(x = "Photosynthetic Pathway", y = "% Diet")
 
 ggsave("Figure 2.jpg", dpi = 300, height = 4, width = 8)
@@ -254,20 +256,20 @@ Boxplots of C:N~atomic~ values of archaeological leporid collagen per site. The 
 archaeo %>%
   mutate(CNatomic = CN * (14/12)) %>%
   ggplot(mapping = aes(y = CNatomic, x = Site.Name, group = Site.Name)) +
-  geom_boxplot(color = "#4d4d4d", size = 0.75) +
+  geom_boxplot(color = "#4d4d4d", linewidth = 0.75) +
   labs(y = expression("C:N"[atomic]), x = "Archaeological Site") +
   theme_classic() +
   theme(legend.position="none",
-        axis.line = element_line(color = "#4d4d4d", size = 1),
+        axis.line = element_line(color = "#4d4d4d", linewidth = 1),
         axis.text.x = element_text(color = "#4d4d4d", size = 12),
         axis.text.y = element_text(color = "#4d4d4d", size = 12),
         axis.title.x = element_text(color = "#4d4d4d", size = 14),
         axis.title.y = element_text(color = "#4d4d4d", size = 14),
-        axis.ticks.x = element_line(color = "#4d4d4d", size = 1),
-        axis.ticks.y = element_line(color = "#4d4d4d", size = 1)) +
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 1)) +
     scale_y_continuous(limits=c(2.9, 3.6)) +
   annotate(geom = "rect", xmin = -Inf, xmax = Inf, ymin = 2.9, ymax = 3.6, 
-           color = "#5da5d8", fill =  "#5da5d8", alpha = 0.5, size = 1)
+           color = "#5da5d8", fill =  "#5da5d8", alpha = 0.5, linewidth = 1)
 ```
 
 ## Data Wrangling
@@ -348,23 +350,23 @@ sand_p1 <- ggplot(sand_plot, aes(x = d13C, y = d15N)) +
        y = "&delta;<sup>15</sup>N (&permil;)") +
   theme_classic() +
   theme(legend.position = "none",
-        axis.line = element_line(color = "#4d4d4d", size = 1),
+        axis.line = element_line(color = "#4d4d4d", linewidth = 1),
         axis.text.x = element_text(color = "#4d4d4d", size = 12),
         axis.text.y = element_text(color = "#4d4d4d", size = 12),
         axis.title.x = element_markdown(color = "#4d4d4d", size = 14, 
                                     face = "bold"),
         axis.title.y = element_markdown(color = "#4d4d4d", size = 14, 
                                     face = "bold"),
-        axis.ticks.x = element_line(color = "#4d4d4d", size = 1),
-        axis.ticks.y = element_line(color = "#4d4d4d", size = 1)) + 
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 1)) + 
   scale_color_viridis_d() +
   stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
-               alpha = 0.25, size = 0.75, linetype = 3, level = 0.95, 
+               alpha = 0.25, linewidth = 0.75, linetype = 3, level = 0.95, 
                type = "t", geom = "polygon") + 
   geom_text(data = sand_label_df,aes(x = d13C, y = d15N, 
                                 label = label, color = group, hjust = hjust,
                                 vjust = vjust),
-            size = 11/.pt, fontface = "bold") +
+            size = 10/.pt, fontface = "bold") +
   scale_fill_viridis_d() +
   scale_x_continuous(limits=c(-27.5, -4), 
                      breaks = c(-25, -20, -15, -10, -5)) +
@@ -377,21 +379,21 @@ sand_p2 <- ggplot(sand_plot, aes(x = d13C, y = d15N)) +
        y = "&delta;<sup>15</sup>N (&permil;)") +
   theme_classic() +
   theme(legend.position = "none",
-        axis.line = element_line(color = "#4d4d4d", size = 1),
+        axis.line = element_line(color = "#4d4d4d", linewidth = 1),
         axis.text.x = element_text(color = "#4d4d4d", size = 12),
         axis.text.y = element_text(color = "#4d4d4d", size = 12),
         axis.title.x = element_markdown(color = "#4d4d4d", size = 14, 
                                     face = "bold"),
         axis.title.y = element_markdown(color = "#4d4d4d", size = 14, 
                                     face = "bold"),
-        axis.ticks.x = element_line(color = "#4d4d4d", size = 1),
-        axis.ticks.y = element_line(color = "#4d4d4d", size = 1)) + 
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 1)) + 
   scale_color_viridis_d() +
   stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
-               alpha = 0.5, size = 1.1, linetype = 1, level = 0.40, 
+               alpha = 0.5, linewidth = 1.1, linetype = 1, level = 0.40, 
                type = "t", geom = "polygon") +
   stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
-               alpha = 0.25, size = 0.75, linetype = 3, level = 0.95, 
+               alpha = 0.25, linewidth = 0.75, linetype = 3, level = 0.95, 
                type = "t", geom = "polygon") + 
   geom_text(data = sand_label_df,aes(x = d13C, y = d15N, 
                                 label = label, color = group, hjust = hjust,
@@ -451,18 +453,18 @@ hum_p1 <- ggplot(hum_plot, aes(x = d13C, y = d15N)) +
        y = "&delta;<sup>15</sup>N (&permil;)") + 
   theme_classic() +
   theme(legend.position = "none",
-        axis.line = element_line(color = "#4d4d4d", size = 1),
+        axis.line = element_line(color = "#4d4d4d", linewidth = 1),
         axis.text.x = element_text(color = "#4d4d4d", size = 12),
         axis.text.y = element_text(color = "#4d4d4d", size = 12),
         axis.title.x = element_markdown(color = "#4d4d4d", size = 14, 
                                     face = "bold"),
         axis.title.y = element_markdown(color = "#4d4d4d", size = 14, 
                                     face = "bold"),
-        axis.ticks.x = element_line(color = "#4d4d4d", size = 1),
-        axis.ticks.y = element_line(color = "#4d4d4d", size = 1)) + 
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 1)) + 
   scale_color_viridis_d() +
   stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
-               alpha = 0.25, size = 0.75, linetype = 3, level = 0.95, 
+               alpha = 0.25, linewidth = 0.75, linetype = 3, level = 0.95, 
                type = "t", geom = "polygon") + 
   geom_text(data = hum_label_df,aes(x = d13C, y = d15N, 
                                 label = label, color = group, hjust = hjust,
@@ -480,21 +482,21 @@ hum_p2 <- ggplot(hum_plot, aes(x = d13C, y = d15N)) +
        y = "&delta;<sup>15</sup>N (&permil;)") + 
   theme_classic() +
   theme(legend.position = "none",
-        axis.line = element_line(color = "#4d4d4d", size = 1),
+        axis.line = element_line(color = "#4d4d4d", linewidth = 1),
         axis.text.x = element_text(color = "#4d4d4d", size = 12),
         axis.text.y = element_text(color = "#4d4d4d", size = 12),
         axis.title.x = element_markdown(color = "#4d4d4d", size = 14, 
                                     face = "bold"),
         axis.title.y = element_markdown(color = "#4d4d4d", size = 14, 
                                     face = "bold"),
-        axis.ticks.x = element_line(color = "#4d4d4d", size = 1),
-        axis.ticks.y = element_line(color = "#4d4d4d", size = 1)) + 
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 1)) + 
   scale_color_viridis_d() +
   stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
-               alpha = 0.5, size = 1.1, linetype = 1, level = 0.40, type = "t", 
+               alpha = 0.5, linewidth = 1.1, linetype = 1, level = 0.40, type = "t", 
                geom = "polygon") +
   stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
-               alpha = 0.25, size = 0.75, linetype = 3, level = 0.95, 
+               alpha = 0.25, linewidth = 0.75, linetype = 3, level = 0.95, 
                type = "t", geom = "polygon") + 
   geom_text(data = hum_label_df,aes(x = d13C, y = d15N, 
                                 label = label, color = group, hjust = hjust,
@@ -554,18 +556,18 @@ tij_p1 <- ggplot(tij_plot, aes(x = d13C, y = d15N)) +
        y = "&delta;<sup>15</sup>N (&permil;)") +
   theme_classic() +
   theme(legend.position = "none",
-        axis.line = element_line(color = "#4d4d4d", size = 1),
+        axis.line = element_line(color = "#4d4d4d", linewidth = 1),
         axis.text.x = element_text(color = "#4d4d4d", size = 12),
         axis.text.y = element_text(color = "#4d4d4d", size = 12),
         axis.title.x = element_markdown(color = "#4d4d4d", size = 14, 
                                     face = "bold"),
         axis.title.y = element_markdown(color = "#4d4d4d", size = 14, 
                                     face = "bold"),
-        axis.ticks.x = element_line(color = "#4d4d4d", size = 1),
-        axis.ticks.y = element_line(color = "#4d4d4d", size = 1)) + 
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 1)) + 
   scale_color_viridis_d() +
   stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
-               alpha = 0.25, size = 0.75, linetype = 3, level = 0.95, 
+               alpha = 0.25, linewidth = 0.75, linetype = 3, level = 0.95, 
                type = "t", geom = "polygon") + 
   geom_text(data = tij_label_df,aes(x = d13C, y = d15N, 
                                 label = label, color = group, hjust = hjust,
@@ -583,21 +585,21 @@ tij_p2 <- ggplot(tij_plot, aes(x = d13C, y = d15N)) +
        y = "&delta;<sup>15</sup>N (&permil;)") + 
   theme_classic() +
   theme(legend.position = "none",
-        axis.line = element_line(color = "#4d4d4d", size = 1),
+        axis.line = element_line(color = "#4d4d4d", linewidth = 1),
         axis.text.x = element_text(color = "#4d4d4d", size = 12),
         axis.text.y = element_text(color = "#4d4d4d", size = 12),
         axis.title.x = element_markdown(color = "#4d4d4d", size = 14, 
                                     face = "bold"),
         axis.title.y = element_markdown(color = "#4d4d4d", size = 14, 
                                     face = "bold"),
-        axis.ticks.x = element_line(color = "#4d4d4d", size = 1),
-        axis.ticks.y = element_line(color = "#4d4d4d", size = 1)) + 
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 1)) + 
   scale_color_viridis_d() +
   stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
-               alpha = 0.5, size = 1.1, linetype = 1, level = 0.40, 
+               alpha = 0.5, linewidth = 1.1, linetype = 1, level = 0.40, 
                type = "t", geom = "polygon") +
   stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
-               alpha = 0.25, size = 0.75, linetype = 3, level = 0.95, 
+               alpha = 0.25, linewidth = 0.75, linetype = 3, level = 0.95, 
                type = "t", geom = "polygon") + 
   geom_text(data = tij_label_df,aes(x = d13C, y = d15N, 
                                 label = label, color = group, hjust = hjust,
@@ -697,12 +699,12 @@ group.ML1 <- data.frame(groupMetricsML(siber.example)) %>%
          "Beans" = X1.Bean,
          "Maize" = X1.Corn,
          "Squash" = X1.Squash,
-         "Free-ranging Turkey" = X1.Free.ranging.Turkey,
-         "Maize-fed Turkey" = X1.Maize.fed.Turkey,
+         "Free-ranging Turkeys" = X1.Free.ranging.Turkey,
+         "Maize-fed Turkeys" = X1.Maize.fed.Turkey,
          "Humans" = X1.Humans) %>%
   t() %>%
   round(digits = 2)
-  
+
 group.ML1 %>%
   data.frame() %>%
   rownames_to_column() %>%
@@ -723,13 +725,30 @@ group.ML1 %>%
 SIBER Maximum Likelihood Overlap with Humans Calculations
 
 ```{r}
+samp_size <- data.frame(siber.example[["sample.sizes"]]) %>% 
+  rename("Hummingbird Pueblo Jackrabbits" = Hummingbird.Pueblo.Lepus,
+         "Hummingbird Pueblo Cottontails" = Hummingbird.Pueblo.Sylvilagus,
+         "Sand Canyon Pueblo Jackrabbits" = Sand.Canyon.Pueblo.Lepus,
+         "Sand Canyon Pueblo Cottontails" = Sand.Canyon.Pueblo.Sylvilagus,
+         "Tijeras Pueblo Jackrabbits" = Tijeras.Pueblo.Lepus,
+         "Tijeras Pueblo Cottontails" = Tijeras.Pueblo.Sylvilagus,
+         "Beans" = Bean,
+         "Maize" = Corn,
+         "Squash" = Squash,
+         "Free-ranging Turkeys" = Free.ranging.Turkey,
+         "Maize-fed Turkeys" = Maize.fed.Turkey,
+         "Humans" = Humans) %>% 
+  pivot_longer(cols = 1:12, names_to = "group", values_to = "n")
+```
+
+
+```{r}
 results <- data.frame()
-taxa <- c("1.Hummingbird Pueblo Lepus", "1.Hummingbird Pueblo Sylvilagus", 
-              "1.Sand Canyon Pueblo Lepus", 
-              "1.Sand Canyon Pueblo Sylvilagus",
-              "1.Tijeras Pueblo Lepus", 
-              "1.Tijeras Pueblo Sylvilagus",
-              "1.Maize-fed Turkey")
+taxa <- c("1.Sand Canyon Pueblo Lepus", "1.Sand Canyon Pueblo Sylvilagus",
+          "1.Hummingbird Pueblo Lepus", "1.Hummingbird Pueblo Sylvilagus", 
+          "1.Tijeras Pueblo Lepus", 
+          "1.Tijeras Pueblo Sylvilagus",
+          "1.Maize-fed Turkey")
 
 for (i in seq_along(taxa)) {
   
@@ -751,13 +770,18 @@ colnames(results) <- c("group", "overlap ‰", "% human niche", "% group niche",
 results$group <- gsub("1.","", as.character(results$group))
 results$group <- gsub("Lepus","Jackrabbits", as.character(results$group))
 results$group <- gsub("Sylvilagus","Cottontails", as.character(results$group))
+results$group <- gsub("Turkey","Turkeys", as.character(results$group))
 
 results %>%
+  left_join(., samp_size, by = "group") %>% 
+  dplyr::select(group, n, `overlap ‰`, `% human niche`, `% group niche`, 
+                `% overlap`) %>% 
   gt() %>%
   cols_label(group = md("**Group**"),
+             n = md("**n**"),
              "overlap ‰" = html("<b>Overlap ‰<sup>2</sup></b>"), 
-             "% human niche" = md("**% of Human Niche**"), 
-             "% group niche" = md("**% of Group's Niche**"),
+             "% human niche" = md("**% Human Niche**"), 
+             "% group niche" = md("**% Group's Niche**"),
              "% overlap" = md("**% Overlap**")) %>%
   tab_header(title = md("**Human Isotopic Niche Overlap Calculations**")) %>%
   tab_footnote(
@@ -840,7 +864,337 @@ overlap_res %>%
 ggsave("Figure 4.jpg", dpi = 300, height = 8, width = 5)
 ```
 
-### References
+## Trophic Discrimination Factors (TDFs)
+We did not use TDFs in our analysis for a few different reasons. To our knowledge, there are no known feeding experiments using the amount of C~4~ resources that Ancestral Pueblo people relied on. Thus, all of the models developed to estimate TDFs based off diet quality do not capture this amount of variation. When we apply TDF models developed by @Caut2009 (see below) humans are projected into extremely unlikely carbon isotope space. Commonly relied on TDF estimation models appear to introduce more error than they help correct. Additionally, we see that these TDF-corrected values do not impact human-leporid overlap to any substantial degree. We argue that our reliance on 95% data ellipse overlap calculations (above) better incorporates error caused by trophic discrimination.
+```{r}
+mammal <- c("Lepus", "Sylvilagus", "Human")
+
+SIBER_data_tdf <- SIBER_data %>% 
+  mutate(d13C = case_when(str_detect(group, paste(mammal, collapse = "|")) ~ 
+                           d13C - (-0.417 * d13C - 7.878),
+                         str_detect(group, "Turkey") ~ 
+                           d13C - (1.76 * 0.64), .default = d13C),
+         new = case_when(str_detect(group, paste(mammal, collapse = "|")) ~ 
+                           d15N - (-0.141 * d15N + 3.975),
+                         str_detect(group, "Turkey") ~ 
+                           d15N - (2.37 * 0.47), .default = d15N))
+```
+
+
+### Sand Canyon TDF
+```{r, fig.width=7, fig.height=5}
+
+sand_label_df <- data.frame(
+  group = c("Sand Canyon Pueblo Lepus", "Sand Canyon Pueblo Sylvilagus",
+            "Free-ranging Turkey", "Humans", "Maize-fed Turkey", "Bean",
+            "Squash", "Corn"),
+  label = c("Sand Canyon Pueblo\nJackrabbbits",
+            "Sand Canyon Pueblo\nCottontails",
+            "Free-Ranging\nTurkeys", "Humans", "Maize-Fed Turkeys", "Beans",
+            "Squash", "Maize"),
+  d13C = c(-17, -20, -13.25, -5.8, -8, -25.25, -24, -9.75),
+  d15N = c(-0.75, 11, 2.5, 12.2, 4.1, -2, 13.25, -1),
+  hjust = c(0.5, 0.5, 0.5, 0, 0, 1, 1, 1),
+  vjust = c(1, 0, 0, 1, 1, 1, 0, 1))
+
+sand_label_df$group <- factor(sand_label_df$group, 
+                          levels = c("Sand Canyon Pueblo Lepus",
+                                     "Sand Canyon Pueblo Sylvilagus",
+                                     "Free-ranging Turkey", "Humans", 
+                                     "Maize-fed Turkey", "Bean", "Squash",
+                                     "Corn"))
+
+sand_plot <- SIBER_data_tdf %>%
+  filter(group %in% c("Sand Canyon Pueblo Lepus", 
+                      "Sand Canyon Pueblo Sylvilagus",
+                      "Bean", "Corn", "Squash", "Free-ranging Turkey",
+                      "Maize-fed Turkey", "Humans"))
+  
+sand_plot$group <- factor(sand_plot$group, 
+                          levels = c("Sand Canyon Pueblo Lepus",
+                                     "Sand Canyon Pueblo Sylvilagus",
+                                     "Free-ranging Turkey", "Humans", 
+                                     "Maize-fed Turkey", "Bean", "Squash",
+                                     "Corn")) 
+  
+sand_p1 <- ggplot(sand_plot, aes(x = d13C, y = d15N)) +
+  geom_point(aes(fill = group, color = group), stroke = 1, size = 4, 
+             alpha = 0.5, shape = 21) +
+  geom_point(aes(color = group), fill = NA, stroke = 1, size = 4, 
+             shape = 21) +
+  labs(x = "&delta;<sup>13</sup>C (&permil;)", 
+       y = "&delta;<sup>15</sup>N (&permil;)") +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.line = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.text.x = element_text(color = "#4d4d4d", size = 12),
+        axis.text.y = element_text(color = "#4d4d4d", size = 12),
+        axis.title.x = element_markdown(color = "#4d4d4d", size = 14, 
+                                    face = "bold"),
+        axis.title.y = element_markdown(color = "#4d4d4d", size = 14, 
+                                    face = "bold"),
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 1)) + 
+  scale_color_viridis_d() +
+  stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
+               alpha = 0.25, linewidth = 0.75, linetype = 3, level = 0.95, 
+               type = "t", geom = "polygon") + 
+  geom_text(data = sand_label_df,aes(x = d13C, y = d15N, 
+                                label = label, color = group, hjust = hjust,
+                                vjust = vjust),
+            size = 10/.pt, fontface = "bold") +
+  scale_fill_viridis_d() +
+  scale_x_continuous(limits=c(-30, 5), 
+                     breaks = c(-30, -25, -20, -15, -10, -5, 0, 5)) +
+  scale_y_continuous(limits=c(-3, 15))
+
+sand_p1
+
+sand_p2 <- ggplot(sand_plot, aes(x = d13C, y = d15N)) +
+  labs(x = "&delta;<sup>13</sup>C (&permil;)", 
+       y = "&delta;<sup>15</sup>N (&permil;)") +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.line = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.text.x = element_text(color = "#4d4d4d", size = 12),
+        axis.text.y = element_text(color = "#4d4d4d", size = 12),
+        axis.title.x = element_markdown(color = "#4d4d4d", size = 14, 
+                                    face = "bold"),
+        axis.title.y = element_markdown(color = "#4d4d4d", size = 14, 
+                                    face = "bold"),
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 1)) + 
+  scale_color_viridis_d() +
+  stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
+               alpha = 0.5, linewidth = 1.1, linetype = 1, level = 0.40, 
+               type = "t", geom = "polygon") +
+  stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
+               alpha = 0.25, linewidth = 0.75, linetype = 3, level = 0.95, 
+               type = "t", geom = "polygon") + 
+  geom_text(data = sand_label_df,aes(x = d13C, y = d15N, 
+                                label = label, color = group, hjust = hjust,
+                                vjust = vjust),
+            size = 10/.pt, fontface = "bold") +
+  scale_fill_viridis_d() +
+  scale_x_continuous(limits=c(-30, 5), 
+                     breaks = c(-30, -25, -20, -15, -10, -5, 0, 5)) +
+  scale_y_continuous(limits=c(-3, 15))
+
+sand_p2
+```
+### Hummingbird TDF
+```{r, fig.width=7, fig.height=5}
+
+hum_label_df <- data.frame(
+  group = c("Hummingbird Pueblo Lepus", "Hummingbird Pueblo Sylvilagus",
+            "Free-ranging Turkey", "Humans", "Maize-fed Turkey", "Bean",
+            "Squash", "Corn"),
+  label = c("Hummingbird Pueblo\nJackrabbbits",
+            "Hummingbird Pueblo\nCottontails",
+            "Free-Ranging\nTurkeys", "Humans", "Maize-Fed Turkeys", "Beans",
+            "Squash", "Maize"),
+  d13C = c(-20, -14.25, -20, -5.8, -8, -25.25, -24, -9.75),
+  d15N = c(1.5, -1.25, 10, 12.2, 4.1, -2, 13.25, -1),
+  hjust = c(0.5, 0.5, 0.5, 0, 0, 1, 1, 1),
+  vjust = c(1, 0, 0, 1, 1, 1, 0, 1))
+
+hum_label_df$group <- factor(hum_label_df$group, 
+                          levels = c("Hummingbird Pueblo Lepus",
+                                     "Hummingbird Pueblo Sylvilagus",
+                                     "Free-ranging Turkey", "Humans", 
+                                     "Maize-fed Turkey", "Bean", "Squash",
+                                     "Corn"))
+
+hum_plot <- SIBER_data_tdf %>%
+  filter(group %in% c("Hummingbird Pueblo Lepus", 
+                      "Hummingbird Pueblo Sylvilagus",
+                      "Bean", "Corn", "Squash", "Free-ranging Turkey",
+                      "Maize-fed Turkey", "Humans"))
+  
+hum_plot$group <- factor(hum_plot$group, 
+                          levels = c("Hummingbird Pueblo Lepus",
+                                     "Hummingbird Pueblo Sylvilagus",
+                                     "Free-ranging Turkey", "Humans", 
+                                     "Maize-fed Turkey", "Bean", "Squash",
+                                     "Corn")) 
+  
+hum_p1 <- ggplot(hum_plot, aes(x = d13C, y = d15N)) +
+  geom_point(aes(fill = group, color = group), stroke = 1, size = 4, 
+             alpha = 0.5, shape = 21) +
+  geom_point(aes(color = group), fill = NA, stroke = 1, size = 4, 
+             shape = 21) +
+  labs(x = "&delta;<sup>13</sup>C (&permil;)", 
+       y = "&delta;<sup>15</sup>N (&permil;)") + 
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.line = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.text.x = element_text(color = "#4d4d4d", size = 12),
+        axis.text.y = element_text(color = "#4d4d4d", size = 12),
+        axis.title.x = element_markdown(color = "#4d4d4d", size = 14, 
+                                    face = "bold"),
+        axis.title.y = element_markdown(color = "#4d4d4d", size = 14, 
+                                    face = "bold"),
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 1)) + 
+  scale_color_viridis_d() +
+  stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
+               alpha = 0.25, linewidth = 0.75, linetype = 3, level = 0.95, 
+               type = "t", geom = "polygon") + 
+  geom_text(data = hum_label_df,aes(x = d13C, y = d15N, 
+                                label = label, color = group, hjust = hjust,
+                                vjust = vjust),
+            size = 10/.pt, fontface = "bold") +
+  scale_fill_viridis_d() +
+  scale_x_continuous(limits=c(-30, 5), 
+                     breaks = c(-30, -25, -20, -15, -10, -5, 0, 5)) +
+  scale_y_continuous(limits=c(-3, 15))
+
+hum_p1
+
+hum_p2 <- ggplot(hum_plot, aes(x = d13C, y = d15N)) +
+  labs(x = "&delta;<sup>13</sup>C (&permil;)", 
+       y = "&delta;<sup>15</sup>N (&permil;)") + 
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.line = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.text.x = element_text(color = "#4d4d4d", size = 12),
+        axis.text.y = element_text(color = "#4d4d4d", size = 12),
+        axis.title.x = element_markdown(color = "#4d4d4d", size = 14, 
+                                    face = "bold"),
+        axis.title.y = element_markdown(color = "#4d4d4d", size = 14, 
+                                    face = "bold"),
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 1)) + 
+  scale_color_viridis_d() +
+  stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
+               alpha = 0.5, linewidth = 1.1, linetype = 1, level = 0.40, type = "t", 
+               geom = "polygon") +
+  stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
+               alpha = 0.25, linewidth = 0.75, linetype = 3, level = 0.95, 
+               type = "t", geom = "polygon") + 
+  geom_text(data = hum_label_df,aes(x = d13C, y = d15N, 
+                                label = label, color = group, hjust = hjust,
+                                vjust = vjust),
+            size = 10/.pt, fontface = "bold") +
+  scale_fill_viridis_d() +
+  scale_x_continuous(limits=c(-30, 5), 
+                     breaks = c(-30, -25, -20, -15, -10, -5, 0, 5)) +
+  scale_y_continuous(limits=c(-3, 15))
+
+hum_p2
+```
+
+### Tijeras TDF
+```{r, fig.width=7, fig.height=5}
+
+tij_label_df <- data.frame(
+  group = c("Tijeras Pueblo Lepus", "Tijeras Pueblo Sylvilagus",
+            "Free-ranging Turkey", "Humans", "Maize-fed Turkey", "Bean",
+            "Squash", "Corn"),
+  label = c("Tijeras Pueblo\nJackrabbbits",
+            "Tijeras Pueblo\nCottontails",
+            "Free-Ranging\nTurkeys", "Humans", "Maize-Fed Turkeys", "Beans",
+            "Squash", "Maize"),
+  d13C = c(-21, -17.5, -17.25, -5.8, -8, -25.25, -24, -9.75),
+  d15N = c(1.5, -1.75, 9.5, 12.2, 4.1, -2, 13.25, -1),
+  hjust = c(0.5, 0.5, 0.5, 0, 0, 1, 1, 1),
+  vjust = c(1, 0, 0, 1, 1, 1, 0, 1))
+
+tij_label_df$group <- factor(tij_label_df$group, 
+                          levels = c("Tijeras Pueblo Lepus",
+                                     "Tijeras Pueblo Sylvilagus",
+                                     "Free-ranging Turkey", "Humans", 
+                                     "Maize-fed Turkey", "Bean", "Squash",
+                                     "Corn"))
+
+tij_plot <- SIBER_data_tdf %>%
+  filter(group %in% c("Tijeras Pueblo Lepus", 
+                      "Tijeras Pueblo Sylvilagus",
+                      "Bean", "Corn", "Squash", "Free-ranging Turkey",
+                      "Maize-fed Turkey", "Humans"))
+  
+tij_plot$group <- factor(tij_plot$group, 
+                          levels = c("Tijeras Pueblo Lepus",
+                                     "Tijeras Pueblo Sylvilagus",
+                                     "Free-ranging Turkey", "Humans", 
+                                     "Maize-fed Turkey", "Bean", "Squash",
+                                     "Corn")) 
+  
+tij_p1 <- ggplot(tij_plot, aes(x = d13C, y = d15N)) +
+  geom_point(aes(fill = group, color = group), stroke = 1, size = 4, 
+             alpha = 0.5, shape = 21) +
+  geom_point(aes(color = group), fill = NA, stroke = 1, size = 4, 
+             shape = 21) +
+  labs(x = "&delta;<sup>13</sup>C (&permil;)", 
+       y = "&delta;<sup>15</sup>N (&permil;)") +
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.line = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.text.x = element_text(color = "#4d4d4d", size = 12),
+        axis.text.y = element_text(color = "#4d4d4d", size = 12),
+        axis.title.x = element_markdown(color = "#4d4d4d", size = 14, 
+                                    face = "bold"),
+        axis.title.y = element_markdown(color = "#4d4d4d", size = 14, 
+                                    face = "bold"),
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 1)) + 
+  scale_color_viridis_d() +
+  stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
+               alpha = 0.25, linewidth = 0.75, linetype = 3, level = 0.95, 
+               type = "t", geom = "polygon") + 
+  geom_text(data = tij_label_df,aes(x = d13C, y = d15N, 
+                                label = label, color = group, hjust = hjust,
+                                vjust = vjust),
+            size = 10/.pt, fontface = "bold") +
+  scale_fill_viridis_d() +
+  scale_x_continuous(limits=c(-30, 5), 
+                     breaks = c(-30, -25, -20, -15, -10, -5, 0, 5)) +
+  scale_y_continuous(limits=c(-3, 15))
+
+tij_p1
+
+tij_p2 <- ggplot(tij_plot, aes(x = d13C, y = d15N)) +
+  labs(x = "&delta;<sup>13</sup>C (&permil;)", 
+       y = "&delta;<sup>15</sup>N (&permil;)") + 
+  theme_classic() +
+  theme(legend.position = "none",
+        axis.line = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.text.x = element_text(color = "#4d4d4d", size = 12),
+        axis.text.y = element_text(color = "#4d4d4d", size = 12),
+        axis.title.x = element_markdown(color = "#4d4d4d", size = 14, 
+                                    face = "bold"),
+        axis.title.y = element_markdown(color = "#4d4d4d", size = 14, 
+                                    face = "bold"),
+        axis.ticks.x = element_line(color = "#4d4d4d", linewidth = 1),
+        axis.ticks.y = element_line(color = "#4d4d4d", linewidth = 1)) + 
+  scale_color_viridis_d() +
+  stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
+               alpha = 0.5, linewidth = 1.1, linetype = 1, level = 0.40, 
+               type = "t", geom = "polygon") +
+  stat_ellipse(aes(group = interaction(group), color = group, fill = group), 
+               alpha = 0.25, linewidth = 0.75, linetype = 3, level = 0.95, 
+               type = "t", geom = "polygon") + 
+  geom_text(data = tij_label_df,aes(x = d13C, y = d15N, 
+                                label = label, color = group, hjust = hjust,
+                                vjust = vjust),
+            size = 10/.pt, fontface = "bold") +
+  scale_fill_viridis_d() +
+  scale_x_continuous(limits=c(-30, 5), 
+                     breaks = c(-30, -25, -20, -15, -10, -5, 0, 5)) +
+  scale_y_continuous(limits=c(-3, 15))
+
+tij_p2
+```
+### All TDF Plots
+```{r, fig.width=14, fig.height=15}
+all_plots <- plot_grid(sand_p1, sand_p2, hum_p1, hum_p2, tij_p1, tij_p2,
+                       labels = "AUTO", label_colour = "#4d4d4d", 
+                       label_size = 20, ncol = 2, nrow = 3)
+
+all_plots
+```
+
+## References
 
 ::: {#refs}
 :::
